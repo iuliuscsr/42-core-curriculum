@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_ops_rotate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/19 19:33:58 by jmalsam          ###   ########.fr       */
+/*   Created: 2026/05/19 14:37:48 by jawosylu          #+#    #+#             */
+/*   Updated: 2026/05/19 19:23:45 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static void	ft_rotate(t_stack **stack)
 {
-	t_stack	*stack_a;
-	t_stack	*temp;
+	t_stack	*ptr;
 
-	stack_a = get_input(argc, argv);
-	if (!stack_a)
-		return (1);
-	temp = stack_a;
-	while (temp)
-	{
-		ft_printf("%d\n", temp->content);
-		temp = temp->next;
-	}
+	ptr = *stack;
+	if (!ptr)
+		return ;
 }

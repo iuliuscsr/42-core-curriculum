@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/19 17:36:51 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/19 19:22:09 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,14 @@ void	ft_stackadd_front(t_stack **lst, t_stack *new);
 void	ft_stackclear(t_stack **lst, void (*del)(int));
 void	ft_stackdelone(t_stack *lst, void (*del)(int));
 t_stack	*ft_stacknew(int content);
+
+// stack operations -- swap
+void	sa(t_stack **stack_a);
+void	sb(t_stack **stack_b);
+void	ss(t_stack **stack_a, t_stack **stack_b);
+
+// stack operations -- push
+void	pa(t_stack **stack_a, t_stack **stack_b);
+void	pb(t_stack **stack_a, t_stack **stack_b);
 
 #endif
