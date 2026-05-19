@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/19 14:30:25 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/19 17:36:51 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,28 @@ typedef struct s_stack
 
 typedef struct s_push_swap
 {
-	t_stack *stack1;
-	t_stack *stack2;
+	t_stack	*stack1;
+	t_stack	*stack2;
 	int		size_stack1;
 	int		size_stack2;
-} t_push_swap;
+}	t_push_swap;
 
 // converting input
-t_stack *get_input(int argc, char **argv);
+t_stack	*get_input(int argc, char **argv);
+t_stack	*create_stack(char **split_input, int wordindex, t_stack *stack_a);
 int		check_input(char **argv, int wordindex, int letterindex);
 int		check_numbers(t_stack *stack_a);
 int		ft_atoi_modified(const char *nptr);
 void	free_and_exit(void);
-
+void	free_split(char **split_input);
+void	del_int(int content);
+char	*concenate_input(int argc, char **argv);
 
 // linked list operations
 void	ft_stackadd_back(t_stack **lst, t_stack *new);
 void	ft_stackadd_front(t_stack **lst, t_stack *new);
-void	ft_stackclear(t_stack **lst, void (*del)(int*));
-void	ft_stackdelone(t_stack *lst, void (*del)(int*));
+void	ft_stackclear(t_stack **lst, void (*del)(int));
+void	ft_stackdelone(t_stack *lst, void (*del)(int));
 t_stack	*ft_stacknew(int content);
 
 #endif

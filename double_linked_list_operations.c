@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:44:17 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/19 14:28:32 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/19 17:29:15 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_stackadd_front(t_stack **lst, t_stack *new)
 	*lst = new;
 }
 
-void	ft_stackclear(t_stack **lst, void (*del)(int*))
+void	ft_stackclear(t_stack **lst, void (*del)(int))
 {
 	t_stack	*temp;
 
@@ -51,17 +51,17 @@ void	ft_stackclear(t_stack **lst, void (*del)(int*))
 	while (*lst != NULL)
 	{
 		temp = (*lst)->next;
-		// ft_stackdelone(*lst, del);
+		ft_stackdelone(*lst, del);
 		*lst = temp;
 	}
 	*lst = NULL;
 }
 
-void	ft_stackdelone(t_stack *lst, void (*del)(int*))
+void	ft_stackdelone(t_stack *lst, void (*del)(int))
 {
 	if (!lst)
 		return ;
-	del(&lst->content);
+	del(lst->content);
 	free(lst);
 }
 
