@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
+/*   Updated: 2026/05/19 14:30:25 by jmalsam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include "ft_printf/ft_printf.h"
+
+typedef struct s_stack
+{
+	int				content;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+}	t_stack;
+
+typedef struct s_push_swap
+{
+	t_stack *stack1;
+	t_stack *stack2;
+	int		size_stack1;
+	int		size_stack2;
+} t_push_swap;
+
+// converting input
+t_stack *get_input(int argc, char **argv);
+int		check_input(char **argv, int wordindex, int letterindex);
+int		check_numbers(t_stack *stack_a);
+int		ft_atoi_modified(const char *nptr);
+void	free_and_exit(void);
+
+
+// linked list operations
+void	ft_stackadd_back(t_stack **lst, t_stack *new);
+void	ft_stackadd_front(t_stack **lst, t_stack *new);
+void	ft_stackclear(t_stack **lst, void (*del)(int*));
+void	ft_stackdelone(t_stack *lst, void (*del)(int*));
+t_stack	*ft_stacknew(int content);
+
+#endif
