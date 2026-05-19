@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/19 19:33:58 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/19 19:54:52 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int	main(int argc, char **argv)
 		ft_printf("%d\n", temp->content);
 		temp = temp->next;
 	}
+	ft_stackclear(&stack_a, del_int);
 }
