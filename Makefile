@@ -6,6 +6,7 @@ RM = rm -f
 
 CFILES = double_linked_list_operations.c input_parsing.c input_parsing_utils.c \
 		stack_ops_push.c stack_ops_swap.c stack_ops_rotate.c stack_ops_reverse_rotate.c \
+		compute_disorder.c control_struct.c \
 
 OFILES = $(CFILES:.c=.o)
 

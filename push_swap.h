@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/20 01:56:38 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/20 17:00:14 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
-typedef struct s_push_swap
+typedef struct s_strg
 {
-	t_stack	*stack1;
-	t_stack	*stack2;
-	int		size_stack1;
-	int		size_stack2;
-}	t_push_swap;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	int		size_stack_a;
+	int		size_stack_b;
+}	t_strg;
 
 // converting input
 t_stack	*get_input(int argc, char **argv);
@@ -40,6 +40,11 @@ void	free_and_exit(void);
 void	free_split(char **split_input);
 void	del_int(int content);
 char	*concenate_input(int argc, char **argv);
+t_strg	*init_control(t_strg *control, t_stack *stack_a, t_stack *stack_b);
+
+//compute disorder
+int		check_mistakes(t_stack *stack_a);
+int		compute_disorder(int mistakes, int size_stack_a);
 
 // linked list operations
 void	ft_stackadd_back(t_stack **lst, t_stack *new);
