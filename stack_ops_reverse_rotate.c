@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_ops_rotate.c                                 :+:      :+:    :+:   */
+/*   stack_ops_reverse_rotate.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 14:37:48 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/20 01:57:43 by jmalsam          ###   ########.fr       */
+/*   Created: 2026/05/20 01:39:16 by jmalsam           #+#    #+#             */
+/*   Updated: 2026/05/20 01:57:04 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_rotate(t_stack **stack)
+static void	ft_reverse_rotate(t_stack **stack)
 {
 	t_stack	*temp;
 
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	temp = *stack;
-	*stack = (*stack)->next;
-	if (*stack)
-		(*stack)->prev = NULL;
-	temp->next = NULL;
-	ft_stackadd_back(stack, temp);
+	while (temp->next)
+		temp = temp->next;
+	temp->prev->next = NULL;
+	temp->prev = NULL;
+	ft_stackadd_front(stack, temp);
 }
 
-void	ra(t_stack **stack_a)
+void	rra(t_stack **stack_a)
 {
-	ft_rotate(stack_a);
-	ft_putendl_fd("ra", 1);
+	ft_reverse_rotate(stack_a);
+	ft_putendl_fd("rra", 1);
 }
 
-void	rb(t_stack **stack_b)
+void	rrb(t_stack **stack_b)
 {
-	ft_rotate(stack_b);
-	ft_putendl_fd("rb", 1);
+	ft_reverse_rotate(stack_b);
+	ft_putendl_fd("rrb", 1);
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	ft_rotate(stack_a);
-	ft_rotate(stack_b);
-	ft_putendl_fd("rr", 1);
+	ft_reverse_rotate(stack_a);
+	ft_reverse_rotate(stack_b);
+	ft_putendl_fd("rrr", 1);
 }

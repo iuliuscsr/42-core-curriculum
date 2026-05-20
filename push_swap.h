@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/19 19:22:09 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/20 01:56:38 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,15 @@ void	ss(t_stack **stack_a, t_stack **stack_b);
 // stack operations -- push
 void	pa(t_stack **stack_a, t_stack **stack_b);
 void	pb(t_stack **stack_a, t_stack **stack_b);
+
+// stack operations -- rotate
+void	ra(t_stack **stack_a);
+void	rb(t_stack **stack_b);
+void	rr(t_stack **stack_a, t_stack **stack_b);
+
+// stack operations -- reverse_rotate
+void	rra(t_stack **stack_a);
+void	rrb(t_stack **stack_b);
+void	rrr(t_stack **stack_a, t_stack **stack_b);
 
 #endif

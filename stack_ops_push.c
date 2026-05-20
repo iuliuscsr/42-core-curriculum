@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:45:50 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/19 19:24:09 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/20 01:49:33 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ static void	ft_push(t_stack **dst, t_stack **src)
 	*src = (*src)->next;
 	if (*src)
 		(*src)->prev = NULL;
-	srcnode->next = *dst;
-	srcnode->prev = NULL;
-	if (*dst)
-		(*dst)->prev = srcnode;
-	*dst = srcnode;
+	ft_stackadd_front(dst, srcnode);
 }
 
 void	pa(t_stack **stack_a, t_stack **stack_b)
