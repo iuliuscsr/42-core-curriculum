@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/22 00:31:23 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/22 00:48:50 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 		return (1);
 	control = init_control(stack_a, stack_b);
 	disorder = compute_disorder(stack_a);
-	// if (disorder < 0.2)
-		selection_sort(control);
+	selection_sort(control);
 	ft_stackclear(&stack_a, del_int);
 }

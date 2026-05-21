@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   selectionsort.c                                    :+:      :+:    :+:   */
+/*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 14:24:41 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/22 00:24:50 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/22 00:47:35 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ int	find_min(t_stack *temp)
 	int	i;
 	int	j;
 	int	min;
-	
+
 	i = 1;
 	j = 1;
 	min = temp->content;
-	
 	while (temp->next)
 	{
 		i++;
@@ -40,7 +39,7 @@ void	selection_sort(t_strg *config)
 	t_stack	*temp;
 	int		i;
 	int		j;
-	
+
 	while (config->stack_a)
 	{
 		temp = config->stack_a;
@@ -53,6 +52,6 @@ void	selection_sort(t_strg *config)
 		}
 		pb(&config->stack_a, &config->stack_b);
 	}
-	while(config->stack_b)
+	while (config->stack_b)
 		pa(&config->stack_a, &config->stack_b);
 }

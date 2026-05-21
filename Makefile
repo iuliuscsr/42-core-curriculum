@@ -8,7 +8,7 @@ CFILES = input_parsing/input_parsing.c input_parsing/input_parsing_utils.c \
 		operations/stack_ops_push.c operations/stack_ops_swap.c operations/stack_ops_rotate.c operations/stack_ops_reverse_rotate.c \
 		operations/double_linked_list_operations.c \
 		compute_disorder.c control_struct.c \
-		selection_sort.c \
+		algorithms/bubble_sort.c algorithms/selection_sort.c \
 
 OFILES = $(CFILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/22 00:24:47 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/22 00:48:19 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_strg
 // converting input
 t_stack	*get_input(int argc, char **argv);
 t_stack	*create_stack(char **split_input, int wordindex, t_stack *stack_a);
+t_strg	*init_control(t_stack *stack_a, t_stack *stack_b);
 int		check_input(char **argv, int wordindex, int letterindex);
 int		check_numbers(t_stack *stack_a);
 int		ft_atoi_modified(const char *nptr);
@@ -40,9 +41,8 @@ void	free_and_exit(void);
 void	free_split(char **split_input);
 void	del_int(int content);
 char	*concenate_input(int argc, char **argv);
-t_strg	*init_control(t_stack *stack_a, t_stack *stack_b);
 
-// compute disorder
+//compute disorder
 double	compute_disorder(t_stack *stack_a);
 
 // linked list operations
@@ -72,6 +72,7 @@ void	rrb(t_stack **stack_b);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
 
 // simple algorithm
+void	bubble_sort(t_stack **stack_a);
 void	selection_sort(t_strg *config);
 int		find_min(t_stack *temp);
 
