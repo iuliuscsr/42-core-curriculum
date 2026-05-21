@@ -1,11 +1,12 @@
 NAME = push_swap.a
 PRINTF = ./ft_printf/libftprintf.a
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -I.
 RM = rm -f
 
-CFILES = double_linked_list_operations.c input_parsing.c input_parsing_utils.c \
-		stack_ops_push.c stack_ops_swap.c stack_ops_rotate.c stack_ops_reverse_rotate.c \
+CFILES = input_parsing/input_parsing.c input_parsing/input_parsing_utils.c \
+		operations/stack_ops_push.c operations/stack_ops_swap.c operations/stack_ops_rotate.c operations/stack_ops_reverse_rotate.c \
+		operations/double_linked_list_operations.c \
 		compute_disorder.c control_struct.c \
 
 OFILES = $(CFILES:.c=.o)
