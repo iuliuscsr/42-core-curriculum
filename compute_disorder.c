@@ -6,39 +6,37 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:52:57 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/20 17:00:26 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/21 11:26:54 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_mistakes(t_stack *stack_a)
+double	compute_disorder(t_stack *stack_a)
 {
-	t_stack	*temp;
-	t_stack	*temp2;
+	t_stack	*i;
+	t_stack	*j;
 	int		nb;
-	int		mistakes;
+	double	mistakes;
+	double	total_pairs;
 
 	mistakes = 0;
-	temp2 = stack_a;
-	while (temp2)
+	total_pairs = 0;
+	i = stack_a;
+	while (i)
 	{
-		nb = temp2->content;
-		temp = temp2->next;
-		while (temp)
+		nb = i->content;
+		j = i->next;
+		while (j)
 		{
-			if (nb > temp->content)
+			if (nb > j->content)
 				mistakes++;
-			temp = temp->next;
+			j = j->next;
+			total_pairs++;
 		}
-		temp2 = temp2->next;
+		i = i->next;
 	}
-	return (mistakes);
-}
-
-int	compute_disorder(int mistakes, int size_stack_a)
-{
-	int	total_pairs;
-
+	if (total_pairs == 0)
+		return (0);
 	return (mistakes / total_pairs);
 }

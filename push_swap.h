@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/20 17:00:14 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/21 10:21:41 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	*concenate_input(int argc, char **argv);
 t_strg	*init_control(t_strg *control, t_stack *stack_a, t_stack *stack_b);
 
 //compute disorder
-int		check_mistakes(t_stack *stack_a);
-int		compute_disorder(int mistakes, int size_stack_a);
+double	compute_disorder(t_stack *stack_a);
 
 // linked list operations
 void	ft_stackadd_back(t_stack **lst, t_stack *new);
