@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/21 12:17:28 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/22 00:24:47 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	free_and_exit(void);
 void	free_split(char **split_input);
 void	del_int(int content);
 char	*concenate_input(int argc, char **argv);
-t_strg	*init_control(t_strg *control, t_stack *stack_a, t_stack *stack_b);
+t_strg	*init_control(t_stack *stack_a, t_stack *stack_b);
 
-//compute disorder
+// compute disorder
 double	compute_disorder(t_stack *stack_a);
 
 // linked list operations
@@ -70,5 +70,9 @@ void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rra(t_stack **stack_a);
 void	rrb(t_stack **stack_b);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
+
+// simple algorithm
+void	selection_sort(t_strg *config);
+int		find_min(t_stack *temp);
 
 #endif
