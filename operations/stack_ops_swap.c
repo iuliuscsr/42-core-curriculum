@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:10:04 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/20 15:52:01 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/24 23:33:38 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,30 @@ static void	ft_swap(t_stack **stack)
 	first->content = tmp;
 }
 
-void	sa(t_stack **stack_a)
+void	sa(t_stack **stack_a, t_env *env)
 {
 	ft_swap(stack_a);
-	ft_putendl_fd("sa", 1);
+	if (!env->bench)
+		ft_putendl_fd("sa", 1);
+	env->total_ops++;
+	env->total_sa++;
 }
 
-void	sb(t_stack **stack_b)
+void	sb(t_stack **stack_b, t_env *env)
 {
 	ft_swap(stack_b);
-	ft_putendl_fd("sb", 1);
+	if (!env->bench)
+		ft_putendl_fd("sb", 1);
+	env->total_ops++;
+	env->total_sb++;
 }
 
-void	ss(t_stack **stack_a, t_stack **stack_b)
+void	ss(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);
-	ft_putendl_fd("ss", 1);
+	if (!env->bench)
+		ft_putendl_fd("ss", 1);
+	env->total_ops++;
+	env->total_ss++;
 }

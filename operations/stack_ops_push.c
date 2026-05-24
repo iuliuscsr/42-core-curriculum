@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:45:50 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/20 01:49:33 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/24 23:32:32 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,20 @@ static void	ft_push(t_stack **dst, t_stack **src)
 	ft_stackadd_front(dst, srcnode);
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+void	pa(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_push(stack_a, stack_b);
-	ft_putendl_fd("pa", 1);
+	if (!env->bench)
+		ft_putendl_fd("pa", 1);
+	env->total_ops++;
+	env->total_pa++;
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
+void	pb(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_push(stack_b, stack_a);
-	ft_putendl_fd("pb", 1);
+	if (!env->bench)
+		ft_putendl_fd("pb", 1);
+	env->total_ops++;
+	env->total_pb++;
 }

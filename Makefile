@@ -7,8 +7,8 @@ RM = rm -f
 CFILES = input_parsing/input_parsing.c input_parsing/input_parsing_utils.c \
 		operations/stack_ops_push.c operations/stack_ops_swap.c operations/stack_ops_rotate.c operations/stack_ops_reverse_rotate.c \
 		operations/double_linked_list_operations.c \
-		compute_disorder.c control_struct.c \
-		algorithms/bubble_sort.c algorithms/selection_sort.c \
+		control_struct.c stack_sorting.c \
+		algorithms/bubble_sort.c algorithms/selection_sort.c algorithms/chunk_sort.c algorithms/algorithm_utils.c \
 
 OFILES = $(CFILES:.c=.o)
 

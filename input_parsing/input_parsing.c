@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:26:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/20 16:08:22 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/22 11:45:25 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*get_input(int argc, char **argv)
+t_stack	*get_input(int argc, char **argv, t_env *env)
 {
 	t_stack	*stack_a;
 	char	*input;
@@ -21,7 +21,7 @@ t_stack	*get_input(int argc, char **argv)
 	int		letterindex;
 
 	stack_a = NULL;
-	wordindex = 0;
+	wordindex = check_flags(argc, argv, env);
 	letterindex = 0;
 	if (argc < 2)
 		return (NULL);

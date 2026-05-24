@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 01:39:16 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/20 01:57:04 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/24 23:32:59 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,30 @@ static void	ft_reverse_rotate(t_stack **stack)
 	ft_stackadd_front(stack, temp);
 }
 
-void	rra(t_stack **stack_a)
+void	rra(t_stack **stack_a, t_env *env)
 {
 	ft_reverse_rotate(stack_a);
-	ft_putendl_fd("rra", 1);
+	if (!env->bench)
+		ft_putendl_fd("rra", 1);
+	env->total_ops++;
+	env->total_rra++;
 }
 
-void	rrb(t_stack **stack_b)
+void	rrb(t_stack **stack_b, t_env *env)
 {
 	ft_reverse_rotate(stack_b);
-	ft_putendl_fd("rrb", 1);
+	if (!env->bench)
+		ft_putendl_fd("rrb", 1);
+	env->total_ops++;
+	env->total_rrb++;
 }
 
-void	rrr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_reverse_rotate(stack_a);
 	ft_reverse_rotate(stack_b);
-	ft_putendl_fd("rrr", 1);
+	if (!env->bench)
+		ft_putendl_fd("rrr", 1);
+	env->total_ops++;
+	env->total_rrr++;
 }

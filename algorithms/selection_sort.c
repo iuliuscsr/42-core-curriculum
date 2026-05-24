@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	find_min(t_stack *temp)
+static int	find_min(t_stack *temp)
 {
 	int	i;
 	int	j;
@@ -34,7 +34,7 @@ int	find_min(t_stack *temp)
 	return (j);
 }
 
-void	selection_sort(t_strg *config)
+void	selection_sort(t_strg *config, t_env *env)
 {
 	t_stack	*temp;
 	int		i;
@@ -47,11 +47,11 @@ void	selection_sort(t_strg *config)
 		i = 1;
 		while (i < j)
 		{
-			ra(&config->stack_a);
+			ra(&config->stack_a, env);
 			i++;
 		}
-		pb(&config->stack_a, &config->stack_b);
+		pb(&config->stack_a, &config->stack_b, env);
 	}
 	while (config->stack_b)
-		pa(&config->stack_a, &config->stack_b);
+		pa(&config->stack_a, &config->stack_b, env);
 }
