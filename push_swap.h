@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/24 23:42:48 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/25 03:22:33 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,16 @@ void	bubble_sort(t_stack **stack_a, t_env *env);
 void	selection_sort(t_strg *config, t_env *env);
 void	chunk_sort(t_stack **stack_a, t_stack **stack_b, t_env *env);
 
+//complex algorithm
+void	radix_sort(t_strg *config, t_env *env);
+
 // exec program
 void	ft_normalize(t_stack *stack, int size);
 double	compute_disorder(t_stack *stack_a);
 void    init_env(t_env *stack);
 int		check_flags(int argc, char **argv, t_env *stack);
 void	print_bench(t_env *env);
-void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env);
+void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env, t_strg *config);
 int		stack_size(t_stack **stack);
 
 #endif

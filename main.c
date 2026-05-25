@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:36:37 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/25 03:23:13 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		return (1);
 	control = init_control(stack_a, stack_b);
-	selection_sort(control, env);
+	stack_sorting(&stack_a, &stack_b, env, control);
 	ft_stackclear(&stack_a, del_int);
 }

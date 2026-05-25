@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 11:29:35 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:41:20 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/25 03:08:38 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	chunk_sort(t_stack **stack_a, t_stack **stack_b, t_env *env)
 	chunk_size = 0;
 	while ((chunk_size + 1) * (chunk_size + 1) <= total_numbers)
 		chunk_size++;
-	printf("%d\n", chunk_size);
+	// printf("%d\n", chunk_size);
 	ft_normalize(*stack_a, stack_size(stack_a));
 	t_stack *temp;
 	temp = *stack_a;
 	while (temp)
 	{
-		printf("Index: %d Wert: %d\n", temp->index, temp->content);
+		// printf("Index: %d Wert: %d\n", temp->index, temp->content);
 		temp = temp->next;
 	}
 	push_chunk_b(stack_a, stack_b, env, chunk_size);

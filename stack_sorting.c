@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 22:37:54 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:36:48 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/25 03:26:07 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int check_flags(int argc, char **argv, t_env *stack)
 
 void	print_bench(t_env *env)
 {
-
 	printf("[bench] disorder: %.2f\n", env->disorder); //problematisch weil kein printf darf benutzt werden -> wir koennen 'f' in unser ft_printf implementieren?
 	ft_printf("[bench] strategy: %s %s\n", env->strategy1, env->strategy2);
 	ft_printf("[bench] total_ops: %d\n", env->total_ops);
@@ -107,8 +106,7 @@ void	print_bench(t_env *env)
 	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n", env->total_ra, env->total_rb, env->total_rr, env->total_rra, env->total_rrb, env->total_rrr);
 }
 
-
-void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env)
+void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env, t_strg *config)
 {
 	double disorder;
 
@@ -118,14 +116,16 @@ void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env)
         bubble_sort(stack_a, env);
 	else if (env->medium == 1)
 		chunk_sort(stack_a, stack_b, env);
+	else if (env->complex == 1)
+		radix_sort(config, env);
     else if (env->adaptive == 1)
 	{
 		if (disorder < 0.2)
 			bubble_sort(stack_a, env); // easy algo
-		else if (disorder >= 0.2 && disorder < 0.5)
-			chunk_sort(stack_a, stack_b, env); // medium algo noch nix da deshalb printf
+		// else if (disorder >= 0.2 && disorder < 0.5)
+		// 	chunk_sort(stack_a, stack_b, env); // medium algo noch nix da deshalb printf
 		else
-			bubble_sort(stack_a, env); // complex algo
+			radix_sort(config, env); // complex algo
 	}
 	if (env->bench == 1)
 		print_bench(env);
