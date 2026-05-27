@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/25 03:22:33 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 05:56:04 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,35 @@
 
 # include "ft_printf/ft_printf.h"
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 3
+# endif
+
 typedef struct s_env
 {
-	int	adaptive;
-	int simple;
-	int medium;
-	int complex;
-	int bench;
-	int total_ops;
-	int	total_sa;
-	int	total_sb;
-	int total_ss;
-	int	total_pa;
-	int	total_pb;
-	int total_ra;
-	int total_rb;
-	int	total_rr;
-	int total_rra;
-	int total_rrb;
-	int	total_rrr;
+	int		adaptive;
+	int		simple;
+	int		medium;
+	int		complex;
+	int		bench;
+	int		print_operations;
+	int		total_ops;
+	int		total_sa;
+	int		total_sb;
+	int		total_ss;
+	int		total_pa;
+	int		total_pb;
+	int		total_ra;
+	int		total_rb;
+	int		total_rr;
+	int		total_rra;
+	int		total_rrb;
+	int		total_rrr;
 	double	disorder;
-	char *strategy1;
-	char *strategy2;
-} t_env;
+	char	*strategy1;
+	char	*strategy2;
+	int		checker;
+}	t_env;
 
 typedef struct s_stack
 {
@@ -47,25 +53,16 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
-typedef struct s_strg
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	int		size_stack_a;
-	int		size_stack_b;
-}	t_strg;
-
 // converting input
 t_stack	*get_input(int argc, char **argv, t_env *env);
 t_stack	*create_stack(char **split_input, int wordindex, t_stack *stack_a);
-t_strg	*init_control(t_stack *stack_a, t_stack *stack_b);
 int		check_input(char **argv, int wordindex, int letterindex);
 int		check_numbers(t_stack *stack_a);
-int		ft_atoi_modified(const char *nptr);
+long	ft_atoi_modified(const char *nptr);
 void	free_and_exit(void);
 void	free_split(char **split_input);
 void	del_int(int content);
-char	*concenate_input(int argc, char **argv);
+char	*concenate_input(int argc, char **argv, int wordindex);
 
 // linked list operations
 void	ft_stackadd_back(t_stack **lst, t_stack *new);
@@ -94,20 +91,36 @@ void	rrb(t_stack **stack_b, t_env *env);
 void	rrr(t_stack **stack_a, t_stack **stack_b, t_env *env);
 
 // simple algorithm
-void	bubble_sort(t_stack **stack_a, t_env *env);
-void	selection_sort(t_strg *config, t_env *env);
+void	bubble_sort(t_stack **stack_a, t_stack **stack_b, t_env *env);
+void	selection_sort(t_stack **stack_a, t_stack **stack_b, t_env *env);
+
+// medium algorithm
 void	chunk_sort(t_stack **stack_a, t_stack **stack_b, t_env *env);
 
 //complex algorithm
-void	radix_sort(t_strg *config, t_env *env);
+void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_env *env);
 
 // exec program
 void	ft_normalize(t_stack *stack, int size);
 double	compute_disorder(t_stack *stack_a);
-void    init_env(t_env *stack);
-int		check_flags(int argc, char **argv, t_env *stack);
+void	init_env(t_env *stack);
 void	print_bench(t_env *env);
-void    stack_sorting(t_stack **stack_a, t_stack **stack_b, t_env *env, t_strg *config);
 int		stack_size(t_stack **stack);
+int		is_sorted(t_stack **stack);
+
+//dispatch algorithm
+void	dispatch_agorithm(t_stack **stack_a, t_stack **stack_b, t_env *env);
+void	adaptive(t_stack **stack_a, t_stack **stack_b,
+			t_env *env, double disorder);
+void	set_simple(t_env *env);
+void	set_medium(t_env *env);
+void	set_complex(t_env *env);
+int		check_flags(int argc, char **argv, t_env *env);
+
+// bonus - checker
+char	*get_next_line(int fd);
+int		c_do_o(char *l, t_stack **stack_a, t_stack **stack_b, t_env *env);
+void	fr_and_m(char *m, t_stack *stack_a, t_stack *stack_b, t_env *env);
+void	init_env_checker(t_env *stack);
 
 #endif

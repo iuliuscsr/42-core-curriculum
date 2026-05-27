@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:19:09 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/19 17:36:54 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 04:54:01 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	free_split(char **split_input)
 	free(split_input);
 }
 
-int	ft_atoi_modified(const char *nptr)
+long	ft_atoi_modified(const char *nptr)
 {
 	int			i;
 	int			sign;
-	long long	result;
+	long		result;
 
 	i = 0;
 	result = 0;
@@ -56,9 +56,7 @@ int	ft_atoi_modified(const char *nptr)
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
-		if (result * sign > INT_MAX || result * sign < INT_MIN)
-			free_and_exit();
 		i++;
 	}
-	return ((int)result * sign);
+	return (result * sign);
 }

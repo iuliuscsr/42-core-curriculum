@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/25 03:23:13 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 04:44:22 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_strg	*control;
 	t_env	*env;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	t_stack	*temp;
-	double	disorder;
 
 	env = malloc(sizeof(t_env));
 	if (!env)
@@ -28,8 +25,8 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	stack_a = get_input(argc, argv, env);
 	if (!stack_a)
-		return (1);
-	control = init_control(stack_a, stack_b);
-	stack_sorting(&stack_a, &stack_b, env, control);
+		return (free(stack_a), free(env), 0);
+	dispatch_agorithm(&stack_a, &stack_b, env);
 	ft_stackclear(&stack_a, del_int);
+	free(env);
 }

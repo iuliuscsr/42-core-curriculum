@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 22:52:40 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/25 03:41:49 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 05:53:22 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,31 @@ static int	max_bits(int max)
 	return (bits);
 }
 
-void	radix_sort(t_strg *config, t_env *env)
+void	radix_sort(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	int	i;
 	int	j;
 	int	size;
 
-	ft_normalize(config->stack_a, config->size_stack_a);
-	size = config->size_stack_a;
+	set_complex(env);
+	if (stack_size(stack_a) <= 5)
+		return (selection_sort(stack_a, stack_b, env));
+	size = stack_size(stack_a);
+	ft_normalize(*stack_a, size);
 	i = 0;
-	while (i < max_bits(config->size_stack_a))
+	while (i < max_bits(size))
 	{
 		j = 0;
 		while (j < size)
 		{
-			if (((config->stack_a->index >> i) & 1) == 0)
-				pb(&config->stack_a, &config->stack_b, env);
+			if ((((*stack_a)->index >> i) & 1) == 0)
+				pb(stack_a, stack_b, env);
 			else
-				ra(&config->stack_a, env);
+				ra(stack_a, env);
 			j++;
 		}
-		while (config->stack_b)
-			pa(&config->stack_a, &config->stack_b, env);
+		while ((*stack_b))
+			pa(stack_a, stack_b, env);
 		i++;
 	}
 }

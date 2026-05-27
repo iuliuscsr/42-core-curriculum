@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   input_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:26:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/22 11:45:25 by jawosylu         ###   ########.fr       */
+/*   Updated: 2026/05/27 05:57:11 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 t_stack	*get_input(int argc, char **argv, t_env *env)
 {
@@ -18,30 +19,29 @@ t_stack	*get_input(int argc, char **argv, t_env *env)
 	char	*input;
 	char	**split_str;
 	int		wordindex;
-	int		letterindex;
 
 	stack_a = NULL;
-	wordindex = check_flags(argc, argv, env);
-	letterindex = 0;
 	if (argc < 2)
 		return (NULL);
-	input = concenate_input(argc, argv);
-	split_str = ft_split(input, ' ');
-	free(input);
-	if (!split_str)
+	wordindex = check_flags(argc, argv, env);
+	input = concenate_input(argc, argv, wordindex);
+	if (!input)
 		return (NULL);
-	if (!check_input(split_str, wordindex, letterindex))
-		return (free_split(split_str), NULL);
-	stack_a = create_stack(split_str, wordindex, stack_a);
+	split_str = ft_split(input, ' ');
+	if (!split_str)
+		return (free(input), NULL);
+	if (!check_input(split_str, 0, 0))
+		return (free(input), free_split(split_str), NULL);
+	stack_a = create_stack(split_str, 0, stack_a);
 	if (!stack_a)
-		return (free_split(split_str), NULL);
+		return (free_split(split_str), free(input), NULL);
 	if (!check_numbers(stack_a))
-		return (ft_stackclear(&stack_a, del_int), free_split(split_str), NULL);
-	free_split(split_str);
-	return (stack_a);
+		return (ft_stackclear(&stack_a, del_int),
+			free_split(split_str), free(input), NULL);
+	return (free(input), free_split(split_str), stack_a);
 }
 
-char	*concenate_input(int argc, char **argv)
+char	*concenate_input(int argc, char **argv, int wordindex)
 {
 	char	*input;
 	char	*temp;
@@ -50,9 +50,11 @@ char	*concenate_input(int argc, char **argv)
 	input = ft_strdup("");
 	if (!input)
 		return (NULL);
-	i = 1;
+	i = wordindex;
 	while (i < argc)
 	{
+		if (argv[i][0] == '\0' || argv[i][0] == 32)
+			return (ft_putendl_fd("Error", 2), free(input), NULL);
 		temp = input;
 		input = ft_strjoin(input, argv[i]);
 		free(temp);
@@ -71,12 +73,20 @@ char	*concenate_input(int argc, char **argv)
 t_stack	*create_stack(char **split_input, int wordindex, t_stack *stack_a)
 {
 	t_stack	*newnode;
+	long	number;
 
 	while (split_input[wordindex])
 	{
-		newnode = ft_stacknew(ft_atoi_modified(split_input[wordindex]));
-		if (!newnode)
+		number = ft_atoi_modified(split_input[wordindex]);
+		if (number > INT_MAX || number < INT_MIN)
+		{
+			ft_putendl_fd("Error", 2);
+			ft_stackclear(&stack_a, del_int);
 			return (NULL);
+		}
+		newnode = ft_stacknew(number);
+		if (!newnode)
+			return (ft_stackclear(&stack_a, del_int), NULL);
 		ft_stackadd_back(&stack_a, newnode);
 		wordindex++;
 	}

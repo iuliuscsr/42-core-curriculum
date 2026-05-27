@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 01:39:16 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/24 23:32:59 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/26 16:31:47 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_reverse_rotate(t_stack **stack)
 void	rra(t_stack **stack_a, t_env *env)
 {
 	ft_reverse_rotate(stack_a);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("rra", 1);
 	env->total_ops++;
 	env->total_rra++;
@@ -38,7 +38,7 @@ void	rra(t_stack **stack_a, t_env *env)
 void	rrb(t_stack **stack_b, t_env *env)
 {
 	ft_reverse_rotate(stack_b);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("rrb", 1);
 	env->total_ops++;
 	env->total_rrb++;
@@ -48,7 +48,7 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_reverse_rotate(stack_a);
 	ft_reverse_rotate(stack_b);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("rrr", 1);
 	env->total_ops++;
 	env->total_rrr++;

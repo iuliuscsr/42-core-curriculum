@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:45:50 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:32:32 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/26 16:31:52 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_push(t_stack **dst, t_stack **src)
 void	pa(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_push(stack_a, stack_b);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("pa", 1);
 	env->total_ops++;
 	env->total_pa++;
@@ -37,7 +37,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b, t_env *env)
 void	pb(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_push(stack_b, stack_a);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("pb", 1);
 	env->total_ops++;
 	env->total_pb++;

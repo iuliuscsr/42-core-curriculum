@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 11:35:52 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:41:53 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 05:52:18 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_sorted(t_stack **stack)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	temp = *stack;
 	while (temp && temp->next)
@@ -26,43 +26,47 @@ int	is_sorted(t_stack **stack)
 	return (1);
 }
 
-int stack_size(t_stack **stack)
+int	stack_size(t_stack **stack)
 {
-    t_stack *tmp;
-    int count = 0;
-    tmp = *stack;
-    while (tmp && tmp->next)
-    {
-        count++;
-        tmp = tmp->next;
-    }
-    count++;
-    return (count);
+	t_stack	*tmp;
+	int		count;
+
+	count = 0;
+	tmp = *stack;
+	while (tmp && tmp->next)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	count++;
+	return (count);
 }
 
-void    bubble_sort(t_stack **stack_a, t_env *env)
+void	bubble_sort(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
-    int	stack_count;
+	int	size;
 	int	i;
 
-    stack_count = stack_size(stack_a);
+	set_simple(env);
+	if (stack_size(stack_a) <= 5)
+		selection_sort(stack_a, stack_b, env);
+	size = stack_size(stack_a);
 	if (is_sorted(stack_a))
 		return ;
-
 	while (!is_sorted(stack_a))
 	{
 		i = 0;
-        while (i < stack_count - 1)
-        {
-            if ((*stack_a)->content > (*stack_a)->next->content)
-                sa(stack_a, env);
-            if (is_sorted(stack_a))
-                return ;
-            ra(stack_a, env);
-            if (is_sorted(stack_a))
-                return ;
-            i++;
-        }
-        ra(stack_a, env);
+		while (i < size - 1)
+		{
+			if ((*stack_a)->content > (*stack_a)->next->content)
+				sa(stack_a, env);
+			if (is_sorted(stack_a))
+				return ;
+			ra(stack_a, env);
+			if (is_sorted(stack_a))
+				return ;
+			i++;
+		}
+		ra(stack_a, env);
 	}
 }

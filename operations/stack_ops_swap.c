@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 11:10:04 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/24 23:33:38 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/26 16:31:21 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_swap(t_stack **stack)
 void	sa(t_stack **stack_a, t_env *env)
 {
 	ft_swap(stack_a);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("sa", 1);
 	env->total_ops++;
 	env->total_sa++;
@@ -39,7 +39,7 @@ void	sa(t_stack **stack_a, t_env *env)
 void	sb(t_stack **stack_b, t_env *env)
 {
 	ft_swap(stack_b);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("sb", 1);
 	env->total_ops++;
 	env->total_sb++;
@@ -49,7 +49,7 @@ void	ss(t_stack **stack_a, t_stack **stack_b, t_env *env)
 {
 	ft_swap(stack_a);
 	ft_swap(stack_b);
-	if (!env->bench)
+	if (env->checker == 0 && env->print_operations == 1)
 		ft_putendl_fd("ss", 1);
 	env->total_ops++;
 	env->total_ss++;
