@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 16:05:53 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/27 13:45:06 by jawosylu         ###   ########.fr       */
+/*   Created: 2026/05/27 15:11:25 by jawosylu          #+#    #+#             */
+/*   Updated: 2026/05/27 17:44:55 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
-int	main(int argc, char **argv)
-{
-	t_env	*env;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+# include "../push_swap.h"
 
-	env = malloc(sizeof(t_env));
-	if (!env)
-		return (0);
-	init_env(env);
-	stack_b = NULL;
-	stack_a = get_input(argc, argv, env);
-	if (!stack_a)
-		return (free(stack_a), free(env), 0);
-	dispatch_agorithm(&stack_a, &stack_b, env);
-	ft_stackclear(&stack_a, del_int);
-	free(env);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 3
+# endif
+
+char	*get_next_line_bonus(int fd);
+int		c_do_o(char *l, t_stack **stack_a, t_stack **stack_b, t_env *env);
+
+#endif

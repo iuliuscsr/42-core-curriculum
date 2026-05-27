@@ -6,7 +6,7 @@
 /*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 15:17:11 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/27 05:54:35 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 18:22:29 by jmalsam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	check_flags(int argc, char **argv, t_env *env)
 		if (ft_strncmp("--bench", argv[i], 8) == 0)
 		{
 			env->bench = 1;
-			env->print_operations = 0;
+			env->print_operations = 1;
 		}
 		else if (ft_strncmp("--simple", argv[i], 9) == 0)
 			env->simple = 1;
@@ -88,7 +88,7 @@ int	check_flags(int argc, char **argv, t_env *env)
 		else if (ft_strncmp("--adaptive", argv[i], 11) == 0)
 			env->adaptive = 1;
 		else
-			free_and_exit();
+			return (0);
 		i++;
 	}
 	if ((env->simple || env->medium || env->complex) && env->adaptive)
@@ -145,4 +145,5 @@ void	print_bench(t_env *env)
 	ft_putstr_fd("\n[bench] total_ops: ", 2);
 	ft_putnbr_fd(env->total_ops, 2);
 	print_bench_operations(env);
+	write(1, "\n", 1);
 }

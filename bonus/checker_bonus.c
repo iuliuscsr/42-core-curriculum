@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 09:48:05 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/27 05:59:48 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 17:45:51 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	init_env_checker(t_env *stack)
+static void	init_env_checker(t_env *stack)
 {
 	stack->adaptive = 1;
 	stack->bench = 0;
@@ -37,7 +37,7 @@ void	init_env_checker(t_env *stack)
 	stack->checker = 1;
 }
 
-void	fr_and_m(char *m, t_stack *stack_a, t_stack *stack_b, t_env *env)
+static void	fr_and_m(char *m, t_stack *stack_a, t_stack *stack_b, t_env *env)
 {
 	ft_stackclear(&stack_a, del_int);
 	ft_stackclear(&stack_b, del_int);
@@ -45,12 +45,41 @@ void	fr_and_m(char *m, t_stack *stack_a, t_stack *stack_b, t_env *env)
 	ft_putendl_fd(m, 1);
 }
 
+void	ch_a_ou(t_stack *stack_a, t_stack *stack_b, t_env *env, int size)
+{
+	if (is_sorted(&stack_a) && stack_b == NULL
+		&& size == stack_size(&stack_a))
+	{
+		fr_and_m("OK", stack_a, stack_b, env);
+	}
+	else
+		fr_and_m("KO", stack_a, stack_b, env);
+}
+
+static int	check_ops_stack(t_stack **stack_a, t_stack **stack_b, t_env *env)
+{
+	char	*line;
+
+	line = get_next_line_bonus(0);
+	if (!line)
+		return (ft_putendl_fd("Error", 1), 0);
+	while (line != NULL)
+	{
+		if (c_do_o(line, stack_a, stack_b, env) == 0)
+			return (free(line), ft_putendl_fd("Error", 1), 0);
+		free(line);
+		line = get_next_line_bonus(0);
+		if (!line)
+			return (free(line), 1);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	t_env	*env;
-	char	*line;
 	int		size;
 
 	env = malloc(sizeof(t_env));
@@ -62,15 +91,8 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		return (free(stack_a), free(env), 0);
 	size = stack_size(&stack_a);
-	while ((line = get_next_line(0)) != NULL)
-	{
-		if (c_do_o(line, &stack_a, &stack_b, env) == 0)
-			return (free(line), ft_putendl_fd("Error", 1), 0);
-		free(line);
-	}
-	if (is_sorted(&stack_a) && stack_size(&stack_b) == 1
-		&& size == stack_size(&stack_a))
-		fr_and_m("OK", stack_a, stack_b, env);
-	else
-		fr_and_m("KO", stack_a, stack_b, env);
+	if ((check_ops_stack(&stack_a, &stack_b, env)) == 0)
+		return (ft_stackclear(&stack_a, del_int),
+			ft_stackclear(&stack_b, del_int), free(env), 0);
+	ch_a_ou(stack_a, stack_b, env, size);
 }

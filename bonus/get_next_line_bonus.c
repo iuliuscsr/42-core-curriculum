@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 12:30:42 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/27 03:23:46 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 17:47:29 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 int	ft_isnewline(char *str)
 {
@@ -99,7 +99,7 @@ void	get_rest(char *str, char *buffer)
 	ft_strlcpy(buffer, str + i, BUFFER_SIZE + 1);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	char		*output;

@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 11:29:35 by jawosylu          #+#    #+#             */
-/*   Updated: 2026/05/27 05:58:20 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 11:09:16 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	update_chunk(int *ch_mi, int *ch_ma, int chunk_size, int *pushed)
+{
+	*ch_mi = *ch_ma + 1;
+	*ch_ma += chunk_size;
+	*pushed = 0;
+}
 
 static int	ft_find_max_pos(t_stack *stack_b)
 {
@@ -58,11 +65,8 @@ void	push_chunk_b(t_stack **stack_a, t_stack **stack_b,
 			ges++;
 			pushed_in_chunk++;
 			if (pushed_in_chunk == chunk_size)
-			{
-				chunk_min = chunk_max + 1;
-				chunk_max += chunk_size;
-				pushed_in_chunk = 0;
-			}
+				update_chunk(&chunk_min, &chunk_max, chunk_size,
+					&pushed_in_chunk);
 		}
 		else
 			ra(stack_a, env);

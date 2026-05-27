@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmalsam <jmalsam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jawosylu <jawosylu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:25:46 by jmalsam           #+#    #+#             */
-/*   Updated: 2026/05/27 05:56:04 by jmalsam          ###   ########.fr       */
+/*   Updated: 2026/05/27 15:31:06 by jawosylu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,5 @@ void	set_simple(t_env *env);
 void	set_medium(t_env *env);
 void	set_complex(t_env *env);
 int		check_flags(int argc, char **argv, t_env *env);
-
-// bonus - checker
-char	*get_next_line(int fd);
-int		c_do_o(char *l, t_stack **stack_a, t_stack **stack_b, t_env *env);
-void	fr_and_m(char *m, t_stack *stack_a, t_stack *stack_b, t_env *env);
-void	init_env_checker(t_env *stack);
 
 #endif
