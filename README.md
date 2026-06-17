@@ -23,7 +23,7 @@ All completed projects have been validated with a score of at least **100/100**.
 | 0 | Libft | ✅ 100/100 |
 | 1 | ft_printf | ✅ 100/100 |
 | 1 | get_next_line | ✅ 100/100 |
-| 1 | push_swap | ⭐ 121/100 |
+| 1 | push_swap | ✅ 121/100 |
 
 ---
 
