@@ -40,6 +40,16 @@ class Plant:
         """returns protected value"""
         return self._age
 
+    def grow(self, cm: float) -> float:
+        """adds plant growth"""
+        self.height += cm
+        return self.height
+
+    def age(self, days: int = 1) -> int:
+        """adds plant age"""
+        self._age += days
+        return self._age
+    
     def show(self) -> str:
         """formats data output-ready"""
         return (f"{self.name}: "
