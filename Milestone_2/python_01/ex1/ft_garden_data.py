@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 class Plant:
-    """this is a class of a plant"""
+    """This is a class of a plant."""
     def __init__(self, name: str, height: int, age: int) -> None:
-        """initializes a new plant"""
+        """Tnitializes a new plant."""
         self.name = name
         self.height = height
         self.age = age
 
     def show(self) -> str:
-        """formats data output-ready"""
+        """Formats data output-ready."""
         return (f"{self.name}: "
                 f"{self.height}cm, "
                 f"{self.age} days old")

@@ -48,11 +48,11 @@ class Plant:
         """Adds plant age."""
         self._age += days
 
-    def show(self) -> None:
+    def show(self) -> str:
         """Formats data output-ready."""
-        print(f"{self.name}: "
-              f"{self._height:.1f}cm, "
-              f"{self._age} days old")
+        return (f"{self.name}: "
+                f"{self._height:.1f}cm, "
+                f"{self._age} days old")
 
 
 class Flower(Plant):
@@ -64,15 +64,18 @@ class Flower(Plant):
         self.flag: bool = False
 
     def bloom(self) -> None:
+        """Lets flower bloom."""
         self.flag = True
 
-    def show(self) -> None:
-        super().show()
-        print(f"Color: {self.color}")
+    def show(self) -> str:
+        """Formats data output-ready."""
+        plant_info = super().show()
+        flower_info = f"\nColor: {self.color}\n"
         if self.flag:
-            print(f"{self.name} is blooming beautifully!")
+            flower_info += f"{self.name} is blooming beautifully!"
         else:
-            print(f"{self.name} has not bloomed yet")
+            flower_info += f"{self.name} has not bloomed yet"
+        return plant_info + flower_info
 
 
 class Tree(Plant):
@@ -85,13 +88,16 @@ class Tree(Plant):
         self.flag: bool = False
 
     def produce_shade(self) -> None:
+        """Produces shade of a tree with its height and trunk_diameter."""
         self.flag = True
         print(f"Tree {self.name} now produces a shade of "
               f"{self._height:.1f}cm long and {self.trunk_diameter}cm wide.")
 
-    def show(self) -> None:
-        super().show()
-        print(f"Trunk diameter: {self.trunk_diameter:.1f}cm")
+    def show(self) -> str:
+        """Formats data output-ready."""
+        flower_info = super().show()
+        tree_info = f"\nTrunk diameter: {self.trunk_diameter:.1f}cm"
+        return flower_info + tree_info
 
 
 class Vegetable(Plant):
@@ -104,13 +110,16 @@ class Vegetable(Plant):
         self.nutritional_value = nutritional_value
 
     def grow(self, cm: float) -> None:
+        """Calculates nutritional value and grows the plant."""
         super().grow(cm)
         self.nutritional_value += 1
 
-    def show(self) -> None:
-        super().show()
-        print(f"Harvest season: {self.harvest_season}\n"
-              f"Nutritional value: {self.nutritional_value}")
+    def show(self) -> str:
+        """Formats data output-ready."""
+        plant_info = super().show()
+        vegetable_info = (f"\nHarvest season: {self.harvest_season}\n"
+                          f"Nutritional value: {self.nutritional_value}")
+        return plant_info + vegetable_info
 
 
 if __name__ == "__main__":
@@ -119,25 +128,25 @@ if __name__ == "__main__":
     print("=== Garden Plant Types ===")
     plant1 = Flower("Rose", 10, 10, "red")
     print("=== Flower ===")
-    plant1.show()
+    print(plant1.show())
     print(f"[asking the {plant1.name} to bloom]")
     plant1.bloom()
-    plant1.show()
+    print(plant1.show())
     print("")
 
     plant2 = Tree("Oak", 200.0, 365, 5.0)
     print("=== Tree ===")
-    plant2.show()
+    print(plant2.show())
     print(f"[asking the {plant2.name} to produce shade]")
     plant2.produce_shade()
     print("")
 
     plant3 = Vegetable("Tomato", 5.0, 10, "April")
     print("=== Vegetable ===")
-    plant3.show()
+    print(plant3.show())
     print(f"[make {plant3.name} grow and age for 20 days]")
     for x in range(20):
         plant3.grow(2.1)
         plant3.age(1)
-    plant3.show()
+    print(plant3.show())
     print("")

@@ -1,31 +1,30 @@
 #!/usr/bin/env python3
 class Plant:
-    """this is a class of a plant"""
-    def __init__(self, name: str, height: float, _age: int) -> None:
-        """initializes a new plant"""
+    """This is a class of a plant."""
+    def __init__(self, name: str, height: float, age: int) -> None:
+        """Initializes a new plant"""
         self.name = name
-        self.height = height
-        self._age = _age
+        self._height = height
+        self._age = age
 
-    def grow(self, cm: float) -> float:
-        """adds plant growth"""
-        self.height += cm
-        return self.height
+    def grow(self, cm: float) -> None:
+        """Adds plant growth."""
+        self._height += cm
 
-    def age(self, days: int = 1) -> int:
-        """adds plant age"""
+    def age(self, days: int = 1) -> None:
+        """Adds plant age."""
         self._age += days
-        return self._age
 
     def show(self) -> str:
-        """formats data output-ready"""
-        return (f"Created: {self.name}: "
-                f"{self.height}cm, "
+        """Formats data output-ready."""
+        return (f"{self.name}: "
+                f"{self._height:.1f}cm, "
                 f"{self._age} days old")
 
 
 if __name__ == "__main__":
     # executes as main program if not imported
+
     plant1 = Plant("Rose", 25.0, 30)
     plant2 = Plant("Oak", 200.0, 365)
     plant3 = Plant("Cactus", 5.0, 90)

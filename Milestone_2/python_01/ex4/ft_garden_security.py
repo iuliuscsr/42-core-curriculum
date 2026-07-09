@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 class Plant:
-    """this is a class of a plant"""
+    """This is a class of a plant."""
     def __init__(self, name: str, height: float, age: int) -> None:
         """initializes a new plant"""
         self.name = name
@@ -8,7 +8,7 @@ class Plant:
         self.set_age(age, flag=True)
 
     def set_height(self, height: float, flag: bool = False) -> None:
-        """protects data from wrong parameters"""
+        """Protects data from wrong parameters."""
 
         if height < 0:
             print(f"{self.name}: Error, height can't be negative")
@@ -21,7 +21,7 @@ class Plant:
                 print(f"Height updated: {round(self._height)}cm")
 
     def set_age(self, age: int, flag: bool = False) -> None:
-        """protects data from wrong parameters"""
+        """Protects data from wrong parameters."""
         if age < 0:
             print(f"{self.name}: Error, age can't be negative")
             print("Age update rejected")
@@ -33,28 +33,26 @@ class Plant:
                 print(f"Age updated: {round(self._age)} days")
 
     def get_height(self) -> float:
-        """returns protected value"""
+        """Returns protected value."""
         return self._height
 
     def get_age(self) -> int:
-        """returns protected value"""
+        """Returns protected value."""
         return self._age
 
-    def grow(self, cm: float) -> float:
-        """adds plant growth"""
-        self.height += cm
-        return self.height
+    def grow(self, cm: float) -> None:
+        """Adds plant growth."""
+        self.set_height(self.get_height() + cm)
 
-    def age(self, days: int = 1) -> int:
-        """adds plant age"""
-        self._age += days
-        return self._age
-    
+    def age(self, days: int = 1) -> None:
+        """Adds plant age."""
+        self.set_age(self.get_age() + days)
+
     def show(self) -> str:
-        """formats data output-ready"""
+        """Formats data output-ready."""
         return (f"{self.name}: "
-                f"{self._height:.1f}cm, "
-                f"{self._age} days old")
+                f"{self.get_height():.1f}cm, "
+                f"{self.get_age()} days old")
 
 
 if __name__ == "__main__":
