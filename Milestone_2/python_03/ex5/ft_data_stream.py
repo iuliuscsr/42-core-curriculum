@@ -22,7 +22,7 @@ def consume_event(custom_list: list[tuple[str, str]]
     while custom_list:
         index: int = random.randrange(len(custom_list))
         event: tuple[str, str] = custom_list[index]
-        custom_list[:] = custom_list[:index] + custom_list[index + 1:]
+        custom_list.pop(index)
         yield event
 
 
@@ -31,19 +31,17 @@ def main() -> None:
 
     print("=== Game Data Stream Processor ===")
 
-    stream = gen_event()
+    stream: typing.Generator[tuple[str, str], None, None] = gen_event()
     for i in range(1000):
         player, action = next(stream)
         print(f"Event {i}: Player {player} did action {action}")
     custom_list: list[tuple[str, str]] = []
 
     for _ in range(10):
-        custom_list += [next(stream)]
+        custom_list.append(next(stream))
     print(f"Built list of 10 events: {custom_list}")
 
-    stream = consume_event(custom_list)
-    for _ in range(10):
-        del_event: tuple[str, str] = next(stream)
+    for del_event in consume_event(custom_list):
         print(f"Got event from list: {del_event}")
         print(f"Remains in list: {custom_list}")
 

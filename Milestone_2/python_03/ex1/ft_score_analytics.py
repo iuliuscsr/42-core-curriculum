@@ -8,8 +8,8 @@ def store_scores() -> list[int]:
     scores: list[int] = []
     for argc in sys.argv[1:]:
         try:
-            score: list[int] = [int(argc)]
-            scores = scores + score
+            score: int = int(argc)
+            scores.append(score)
         except ValueError:
             print(f"Invalid parameter: '{argc}'")
     return scores
