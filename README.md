@@ -20,11 +20,15 @@ All completed projects have been validated with a score of at least **100/100**.
 
 | Milestone | Project | Score |
 |-----------|----------|--------|
-| 0 | Libft | ✅ 100/100 |
+| 0 | libft | ✅ 100/100 |
 | 1 | ft_printf | ✅ 100/100 |
 | 1 | get_next_line | ✅ 100/100 |
 | 1 | push_swap | ✅ 121/100 |
-
+| 2 | python module 00 | ✅ | 100 |
+| 2 | python module 01 | ✅ | 100 |
+| 2 | python module 02 | ✅ | 90 |
+| 2 | python module 03 | ✅ | 100 |
+| 2 | python module 04 | in progress | ... |
 ---
 
 ## Completed Projects
