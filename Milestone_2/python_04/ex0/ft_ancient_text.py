@@ -3,21 +3,21 @@ import sys
 import typing
 
 
-def open_file() -> None:
+def open_file() -> str:
     """Opens and reads user given file."""
 
-    if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
-        return
-    file: typing.Optional[typing.IO[str]] = None
+    file: typing.IO[str] | None = None
     try:
-        file = open(sys.argv[1], "r")
         print(f"Accessing file '{sys.argv[1]}'")
+        file = open(sys.argv[1], "r")
+        content = file.read()
         print("---\n")
-        print(file.read())
+        print(content)
         print("\n---")
+        return content
     except Exception as err:
         print(f"Error opening file '{sys.argv[1]}': {err}")
+        sys.exit(1)
     finally:
         if file is not None:
             file.close()
@@ -25,9 +25,14 @@ def open_file() -> None:
 
 
 def main() -> None:
+    """Displays file operations."""
+
+    if len(sys.argv) != 2:
+        print("Usage: ft_ancient_text.py <file>")
+        sys.exit(1)
+
     print("=== Cyber Archives Recovery ===")
     open_file()
-
 
 
 if __name__ == "__main__":

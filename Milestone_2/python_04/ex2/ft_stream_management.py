@@ -16,7 +16,8 @@ def open_file() -> str:
         print("\n---")
         return content
     except Exception as err:
-        print(f"Error opening file '{sys.argv[1]}': {err}")
+        print(f"[STDERR] Error opening file '{sys.argv[1]}': {err}",
+              file=sys.stderr)
         sys.exit(1)
     finally:
         if file is not None:
@@ -35,7 +36,8 @@ def transform_file(content: str) -> None:
     print("\n---")
 
     file: typing.IO[str] | None = None
-    file_name: str = input("Enter new file name (or empty): ")
+    print("Enter new file name (or empty): ", end="", flush=True)
+    file_name: str = sys.stdin.readline().strip()
     if not file_name:
         print("Not saving data.")
         return
@@ -45,7 +47,8 @@ def transform_file(content: str) -> None:
         file.write(new_content)
         print(f"Data saved in file '{file_name}'.")
     except Exception as err:
-        print(f"Error saving file '{file_name}': {err}")
+        print(f"[STDERR] Error opening file '{file_name}': {err}",
+              file=sys.stderr)
         print("Data not saved.")
     finally:
         if file is not None:
@@ -56,7 +59,7 @@ def main() -> None:
     """Displays file operations."""
 
     if len(sys.argv) != 2:
-        print("Usage: ft_archive_creation.py <file>")
+        print("Usage: ft_stream_management.py <file>", file=sys.stderr)
         sys.exit(1)
 
     print("=== Cyber Archives Recovery & Preservation ===")
