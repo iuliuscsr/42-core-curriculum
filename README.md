@@ -28,7 +28,9 @@ All completed projects have been validated with a score of at least **100/100**.
 | 2 | python module 01 | ✅ 100/100 |
 | 2 | python module 02 | ✅ 90/100 |
 | 2 | python module 03 | ✅ 100/100 |
-| 2 | python module 04 | in progress | ... |
+| 2 | python module 04 | ✅ 100/100 |
+| 2 | Born2beroot | in progress... |
+
 ---
 
 ## Completed Projects
