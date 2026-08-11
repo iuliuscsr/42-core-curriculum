@@ -60,7 +60,7 @@ class NumericProcessor(DataProcessor):
             return all(type(item) in (int, float) for item in data)
         return False
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: int | float | list[int | float]) -> None:
         if not self.validate(data):
             raise ValueError("Improper numeric data")
         if type(data) is list:
@@ -78,13 +78,13 @@ class TextProcessor(DataProcessor):
             return all(type(item) is str for item in data)
         return False
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise ValueError("Improper text data")
         if type(data) is list:
             self.storage.extend(data)
         else:
-            self.storage.append(data)
+            self.storage.append(str(data))
 
 
 class LogProcessor(DataProcessor):
@@ -108,10 +108,10 @@ class LogProcessor(DataProcessor):
                 )
         return False
 
-    def ingest(self, data: typing.Any) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise ValueError("Improper log data")
-        if type(data) is list:
+        if isinstance(data, list):
             self.storage.extend(
                 f"{item['log_level']}: {item['log_message']}" for item in data
             )
