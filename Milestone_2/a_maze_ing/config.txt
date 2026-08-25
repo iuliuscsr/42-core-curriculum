@@ -1,12 +1,7 @@
-# this is only comment
-
-WIDTH=20
+WIDTH=15
 HEIGHT=15
 ENTRY=0,0
-EXIT=19,14
+EXIT=12,8
 OUTPUT_FILE=maze.txt
-PERFECT=True
-
-#seed=...
-#algorithm=...
-#display_mode=...
+PERFECT=False
+#SEED=42

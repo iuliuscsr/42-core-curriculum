@@ -6,6 +6,7 @@ imperfect mazes with a hexadecimal wall representation
 """
 import random
 import sys
+from collections import deque
 
 
 class MazeGenerator():
@@ -40,21 +41,32 @@ class MazeGenerator():
             entry: tuple[int, int],
             exit_: tuple[int, int],
             perfect: bool,
-            seed: int | None
+            output_file: str,
+            seed: int | float | None
     ) -> None:
         """Set up generation parameters."""
 
-        self._rng = random.Random(seed)
         self.width = width
         self.height = height
         self.entry = entry
         self.exit = exit_
         self.perfect = perfect
+        self.output_file = output_file
         self.seed = seed
         self.rng = random.Random(seed)
         self.grid: list[list[int]] = []
         self.blocked_cells: set[tuple[int, int]] = set()
         self.initialize_closed_grid()
+
+    def generate_maze(self) -> None:
+        """Generates the maze."""
+
+        self.initialize_closed_grid()
+        self.create_42_pattern()
+        self.carve_maze()
+        if not self.perfect:
+            self.imperfect_maze()
+        self.hex_output()
 
     def initialize_closed_grid(self) -> None:
         """Initializes a closed grit with zero open walls."""
@@ -100,6 +112,8 @@ class MazeGenerator():
         start_x = (self.width - self.PATTERN_WIDTH) // 2
         start_y = (self.height - self.PATTERN_HEIGHT) // 2
 
+        pattern_coords: set[tuple[int, int]] = set()
+
         for py in range(self.PATTERN_HEIGHT):
             for px in range(self.PATTERN_WIDTH):
                 if self.PATTERN_42[py][px] == 1:
@@ -112,6 +126,7 @@ class MazeGenerator():
                         )
                         return
                     self.blocked_cells.add((gx, gy))
+                    pattern_coords.add((gx, gy))
                     self.grid[gy][gx] = 15
 
     def check_neighbors(
@@ -120,7 +135,9 @@ class MazeGenerator():
             y: int,
             visited: set[tuple[int, int]]
             ) -> list[tuple[str, int, int]]:
-        """Checks a coordinate for available neighbors by validating each direction within a set."""
+        """Checks a coordinate for available neighbors by
+           validating each direction within a set."""
+
         neighbors: list[tuple[str, int, int]] = []
         for direction, (dx, dy, _, _) in self.DIRECTIONS.items():
             nx, ny = x + dx, y + dy
@@ -130,14 +147,18 @@ class MazeGenerator():
         return neighbors
 
     def carve_maze(self) -> None:
-        """Carves a perfect maze, using the DFS algorithm (depth-first-search) a stack based
-        backtracker, skipping blocked cells."""
+        """Carves a perfect maze, using the DFS algorithm
+           (depth-first-search) a stack based
+            backtracker, skipping blocked cells."""
+
         visited: set[tuple[int, int]] = set(self.blocked_cells)
         visited.add(self.entry)
         stack: list[tuple[int, int]] = [self.entry]
         while stack:
-            x,y = stack[-1]
-            neighbors: list[tuple[str, int, int]] = self.check_neighbors(x, y, visited)
+            x, y = stack[-1]
+            neighbors: list[tuple[str, int, int]] = self.check_neighbors(
+                x, y, visited
+            )
             if not neighbors:
                 stack.pop()
                 continue
@@ -146,15 +167,87 @@ class MazeGenerator():
             visited.add((nx, ny))
             stack.append((nx, ny))
 
-    def generate_maze(self) -> None:
-        """Generates the maze."""
-
-        self.initialize_closed_grid()
-        self.create_42_pattern()
-        self.carve_maze()
-
     def shortest_path(self) -> list[str]:
-        pass
+        """Finds the shortest way from entry to exit using the bfs
+        algorithm (breadth-first-seach), analog to a reverse linked list."""
 
-    def hex_solution(self) -> list[int]:
-        pass
+        prev_next: dict[
+            tuple[int, int], tuple[tuple[int, int], str] | None
+        ] = {}
+        visited: set[tuple[int, int]] = {self.entry}
+        memory: deque[tuple[int, int]] = deque([self.entry])
+        while memory:
+            x, y = memory.popleft()
+            if (x, y) == self.exit:
+                break
+            for direction, (nx, ny, wall, _) in self.DIRECTIONS.items():
+                if self.grid[y][x] & wall:
+                    continue
+                neighbor = (x + nx, y + ny)
+                if neighbor in visited:
+                    continue
+                visited.add(neighbor)
+                prev_next[neighbor] = ((x, y), direction)
+                memory.append(neighbor)
+        else:
+            raise Exception("No path found between entry and exit")
+        path_coords: list[str] = []
+        current = self.exit
+        while current != self.entry:
+            step = prev_next.get(current)
+            assert step is not None
+            previous, direction = step
+            path_coords.append(direction)
+            current = previous
+        path_coords.reverse()
+        return path_coords
+
+    def hex_output(self) -> None:
+        """Writes the maze in an output file
+        using one hexadecimal digit per cell."""
+
+        hex_string: list[str] = []
+        for y in range(self.height):
+            for x in range(self.width):
+                bit: int = self.grid[y][x]
+                hex_string.append(f"{bit:X}")
+            hex_string.append("\n")
+        output_maze: str = "".join(hex_string)
+        path_list: list[str] = self.shortest_path()
+        output_solution: str = "".join(path_list)
+        entry_x, entry_y = (self.entry)
+        exit_x, exit_y = (self.exit)
+        entry_str = f"{entry_x},{entry_y}"
+        exit_str = f"{exit_x},{exit_y}"
+        with open(self.output_file, "w", encoding="utf-8") as file:
+            file.write(output_maze)
+            file.write("\n")
+            file.write(f"{entry_str}\n")
+            file.write(f"{exit_str}\n")
+            file.write(output_solution)
+
+    def imperfect_maze(self) -> None:
+        """Removes 2% of total walls, in order to make the maze imperfect."""
+
+        percentage: float = 0.02
+        tot_cells: int = self.height * self.width
+        remove_tot: int = int(tot_cells * percentage)
+        remove_curr: int = 0
+
+        while remove_curr < remove_tot:
+            x: int = self.rng.randint(0, self.width - 1)
+            y: int = self.rng.randint(0, self.height - 1)
+            if (x, y) in self.blocked_cells:
+                continue
+            direction: str = self.rng.choice(list(self.DIRECTIONS.keys()))
+            dx, dy, wall_from, _ = self.DIRECTIONS[direction]
+            nx, ny = x + dx, y + dy
+
+            if (
+                0 <= nx < self.width
+                and 0 <= ny < self.height
+                and (nx, ny) not in self.blocked_cells
+            ):
+                if self.grid[y][x] & wall_from:
+                    self.create_path(x, y, nx, ny, direction)
+                    remove_curr += 1
