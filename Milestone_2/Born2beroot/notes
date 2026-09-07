@@ -1,0 +1,176 @@
+pw:HelloMy42! 
+HelloMy42!!
+General Information:
+
+VM - Virtual Machine (Virutal Box)
+saves data in vdi (virtualbox disk image) file simulating hard disk -> saves operating system, partitions, installations
+
+host system - operating system on the hardware
+guest system - virtual operating system within the VM
+
+signature.txt from .vdi file (hexadecimal 40char signature)
+it's a protection which ensures, that after submitting the project in git the VM has not been changed since then. As any change would lead to a change in the SHA1-Hash.
+SHA1-Hash is a digital fingerprint for files to see if they were modified or not.
+
+Normale User & Gruppen haben nur in ihrem eigenen Home-Verzeichnis volles Recht mit 
+sudo - superuser do 
+koennen diese Rechte temporaer angehoben werden
+
+Hypervisor:
+mit einem Hypervisor kann unsere VM erstellt werden., man unterscheidet zwischen Bare-metal (direkt auf hardware) und Hosted (additional layer on top of our existing operating system)
+
+Debian vs Rocky vs RHEL (Red Hat Enterprise Linux)
+-beides besitzt den Linux Kernel und GNU (GNU not Unix) Bibliotheken
+-steht unter GPL-Lizenz -> offener Code
+-Debian wird rein von der Community gesteuert und priorisiert Stabilitaet und Freiheit garantiert, indem neue Versionen monatelang getestet werden. Und somit trotzdem immer auf dem neusten Stand ist
+
+Red Hat / Rocky
+-Hintergrund ist, wenn grosse Konzerne Software im Wert von Millionen kaufen nicht wollen, dass vielleicht schon nach 2 Jahren updates gemacht werden muessen
+-> daher "friert" Rocky Software Versionen bei release ein. Sollte irgendein lack gefunden werden wird keine neue Version heruntergeladen, sondern versucht die Luecke zu schliessen. So bleibt der code ueber 10 Jahre hinweg erhalten. Das nennt man Enterprise Stability.
+
+bei Red Hat (RHEL:
+-es gibt einen teuren Firmenservice, der sich um Probleme kuemmert.
+
+Rocky uebernimmt das System aber ohne den teuren Service
+
+Conclusion:
+BEIDE:
+Linux-Kernel + GNU-Tools
+
+GETRENNT:
+Package-Manager (apt - dnf)
+Security (AppArmor - SELinux)
+Release-Cycle (~2j - 10+j)
+
+
+Verzeichnisstruktur:
+/home - Benutzerdateien
+/etc - Konfigurationsdateien
+/var/log - System-logs, cache, backups
+/usr - unix system resources
+	/bin - Systemprogramme
+	/lib - Bibliotheken
+
+Hardware(Basis)
+
+sda (SATA Disk A)
+hard disk (Festplatte)
+
+
+Prozessor(CPU)
+Arbeitsspeicher(RAM)
+Festplatte(Storage)
+Netzwerkkarte
+
+Kernel(Heart)
+
+Bridge between Hardware and Software
+
+LVM = Logical Volume Manager
+-Die Festplatteneinteilung wird vom LVM uebernommen. Er weist Speicher zu. Ohne Bonus teilen sich alle directories den selben Speicher. Mit Bonus kann man das separieren. (Risikominimierung)
+
+SSH
+Secure Shell
+udp - sehr schnell, prueft nicht ob Pakete ankommen oder Empfaenger bereit ist -> bei Temporelevanz
+tcp - zuverlaessig, Verbindungsorientiert, langsamer -> bei Genauigkeitsrelevanz
+
+Sudo (Superuser do)
+temporaer werden Recht auf "root" angehoben.
+bei root sind die rechte permanent erhoben.
+
+SUDO-KONFIG:
+passwd_tries
+badpass_message
+logfile (trackt jeden sudo befehl)
+log_input, log_output (trackt auch display und was mit sudo-rechten geschrieben wird)
+iolog_dir 
+requiretty -> zwingt sudo dazu befehle nur von einem echten terminal aus auszufuehren (kein skript im hintergrund kann an den rechten feilschen) -> TTY
+secure_path -> legt eine Liste von Pfaden fest, die durchsucht werden duerfen.
+
+Firewall Management:
+
+Debian ufw externe Kontrolle des Netzwerkdatenverkehrs (Port etc)
+Rocky cmd
+
+Media Access Control:
+AppArmor/SELinux interne Kontrolle der Abhaengigkeiten
+
+Apt - Aptitude
+apt ist ein regelbasierter package manager, wenn etwas nicht klappt kommt ein Fehler, ende
+aptitude ist im Gegensatz dazu ein "intelligenter Problemloeser" wenn etwas nicht klappt wird nach einer moeglichen Loesung gesucht.
+Es hat deutlich mehr bibliotheken und braucht auch mehr Leistung, weshalb im Alltag meistens apt benutzt wird stattdessen.
+
+Cron:
+eingebauter Zeitplaner von Linux.
+Fuehrt zu festgelegten Zeiten Skripte, Befehle etc aus.
+
+
+
+Terminal:
+
+bash:
+lsblk				zeigt partitionen
+sha1sum 'filename'		gibt den sha1 key aus
+hostname			zeigt den hostnamen
+hostnamectl			zeigt zusaetzliche infos
+sudo hostnamectl set-hostname 'hostname'
+sudo nano /etc/hosts		hostname ebenfalls aendern
+
+su -				fragt root rechte an
+apt install sudo		installiert sudo
+sudo visudo			Syntaxkorrektur
+sudo nano /etc/sudoers		kein Syntaxkorrektur
+sudo cat /var/log/sudo/sudo.log Zeigt Sudo logs
+
+dpkg -l | grep sudo		prueft, ob die installation erfolgreich war (ii) (dpkg = debian package)
+adduser 'username' sudo		added user zu sudo
+getent group sudo		zeigt user innerhalb der Gruppe sudo (getent = get entry)
+cat /etc/group | grep sudo
+groups 'username'		zeigt alle Gruppen eines Benutzers
+cat /etc/passwd
+
+reboot				abmelden und neu starten
+sudo -v				(validiert sudo, resettet 15min timer von Passwortabfrage)
+-p				(parent, erstellt subdirectories ebenfalls, falls nicht vorhanden)
+
+systemctl status ssh		checks ssh status
+sudo service ssh status
+
+Firewall Management:
+sudo ufw allow 'port'		erlaubt spezifischen port '4242'
+sudo ufw deny
+sudo ufw enable			aktiviert firewall
+sudo ufw status numbered	zeigt status von ufw
+ss -tunlp			zeigt alle offenen Ports
+sudo /usr/sbin/ufw status	zeigt Firewallstatus
+
+AppArmor:
+sudo /usr/sbin/aa-status	zeigt, dass AppArmor aktiv ist
+
+OS:
+head -n 2 /etc/os-release
+
+
+User Management:
+sudo addgroup 'groupname'
+getent group 'groupname'
+sudo adduser 'username'
+getent passwd 'username'
+sudo usermod -aG 'groupname' 'username' fuegt User zu Gruppe hinzu
+sudo deluser 'username' 'groupname'	entfernt user aus Gruppe
+sudo deluser --remove-home 'username
+
+Password Management
+sudo nano /etc/pam.d/common-password
+passwd 'username'
+sudo passwd root
+
+cron
+sudo crontab -u root -l
+/usr/local/bin/monitoring.sh	dort liegt das skript
+sudo systemctl stop cron
+sudo systemctl status cron
+
+
+
+

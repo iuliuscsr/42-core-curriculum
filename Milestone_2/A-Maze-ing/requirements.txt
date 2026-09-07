@@ -1,0 +1,10 @@
+# Local custom wheel
+./mlx-2.2-py3-none-any.whl
+
+# Core dependencies
+pydantic
+
+# Development & Quality Assurance
+flake8
+mypy
+build
