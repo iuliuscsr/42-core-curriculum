@@ -31,9 +31,14 @@ All completed projects have been validated with a score of at least **100/100**.
 | 2 | python module 04 | ✅ 100/100 |
 | 2 | python module 05 | ✅ 100/100 |
 | 2 | python module 06 | ✅ 100/100 |
-| 2 | python module 07 | ready for submission... |
-| 2 | python module 08 | in progress... |
-| 2 | Born2beroot | in progress... |
+| 2 | python module 07 | ✅ 100/100 |
+| 2 | python module 08 | ✅ 100/100 |
+| 2 | python module 09 | ✅ 100/100 |
+| 2 | python module 10 | ✅ 100/100 |
+| 2 | born2beroot | ✅ 100/100  |
+| 2 | a_maze_ing | ✅ 110/100 |
+| 3 | call_me_maybe | ...in progress |
+
 
 ---
 
