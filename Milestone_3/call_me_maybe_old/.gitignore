@@ -1,0 +1,7 @@
+notes.txt
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+data/output/
+*.egg-info/
